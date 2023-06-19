@@ -28,6 +28,15 @@ pump_z=6*in;
 pump_ramp=pump_x-four-wood;
 pump_center=bed_y/3;
 
+mattress_r=2*in;
+spines=6;
+leveler_gap=in/2;
+spine_end=0;
+spine_gap=(bed_y-four-spine_end*2)/(spines-1);
+leveler=leg_y(0)+pillowboard_y+wood;
+
+
+
 function leg_y(z)=bed_y-overhang+tan(leg_angle)*z-wood;
 
 // RENDER svg
@@ -96,5 +105,29 @@ module legs() {
 
 }
 
-legs();
+module leg_ribs() {
+	module rib(n=0) {
+		dirror_x()
+		translate([-bed_x/2+overhang+wood,four/2-two/2+spine_gap*n,two+leveler_gap])
+		color("magenta")
+		cube([four,two,bed_z-bed_wood-two*2-leveler_gap]);
+	}
 
+	rib();
+	rib(3);
+	rib(4);
+}
+
+module leveler() {
+	dirror_x()
+	translate([overhang+wood-bed_x/2,-pillowboard_y-wood,leveler_gap])
+	cube([four,leveler,two]);
+}
+
+module legs_handcut() {
+	leg_ribs();
+	leveler();
+}
+
+legs();
+legs_handcut();

@@ -103,4 +103,23 @@ module headboard() {
 
 }
 
+module headboard_post() {
+	dirror_x()
+	color("lime")
+	translate([-bed_x/2+overhang+wood,-pillowboard_y-wood-two])
+	cube([four,two,bed_z-pillowboard_depth+pillowboard_z-pillowboard_border-shelf_z-wood-four]);
+}
+
+module headboard_brace() {
+	color("green")
+	translate([pillowboard_border-pillowboard_x/2+wood,-pillowboard_y-wood-two,bed_z-pillowboard_depth+pillowboard_z-pillowboard_border-shelf_z-wood-four])
+	cube([pillowboard_x-pillowboard_border*2-wood*2,two,four]);
+}
+
+module headboard_handcut() {
+	headboard_post();
+	headboard_brace();
+}
+
 headboard();
+headboard_handcut();
