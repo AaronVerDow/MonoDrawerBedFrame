@@ -1,18 +1,4 @@
 include <common.scad>
-bed_wood=wood;
-
-bed_x=1530;
-bed_y=2030;
-bed_z=12*in;
-bed_r=5*in;
-
-mattress_r=2*in;
-
-overhang=10*in;
-spines=6;
-spine_end=0;
-spine_gap=(bed_y-four-spine_end*2)/(spines-1);
-
 
 module bed() {
 	translate([-bed_x/2,0])

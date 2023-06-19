@@ -1,29 +1,11 @@
 include <common.scad>
 use <caster.scad>
 
-bed_wood=wood;
-bed_x=1530;
-bed_y=2030;
-bed_z=12*in;
-
-pillowboard_y=4*in;
-
-overhang=10*in;
-
-leg_x=four+wood*2;
-
-wheel_z=28;
-caster_x=20.5;
-caster_y=42;
-
 drawer_x_gap=wood*2;
 drawer_top_gap=wood*2;
 drawer_base_gap=wood*2;
 drawer_x=bed_x-leg_x*2-drawer_x_gap-overhang*2;
 drawer_z=bed_z-bed_wood-two-drawer_top_gap;
-
-// t=o/a
-leg_angle=atan(overhang/(bed_z-bed_wood-two));
 
 // c=a/h
 drawer_face=(drawer_z-drawer_base_gap)/cos(leg_angle);
@@ -33,8 +15,6 @@ caster_edge=caster_y;
 caster_front=leg_y(wheel_z)-caster_edge;
 caster_back=caster_edge;
 caster_mid=(caster_back-caster_front)/2+caster_front;
-
-function leg_y(z)=bed_y-overhang+tan(leg_angle)*z-wood;
 
 // RENDER svg
 module drawer_side() {

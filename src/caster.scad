@@ -1,13 +1,10 @@
 include <common.scad>
 
 wheel_hole=5*in;
-wheel_z=28;
 wheel=in;
 wheel_d=13;
 caster_hole=4;
 caster_gap=32;
-caster_x=20.5;
-caster_y=42;
 caster_wall=in/16;
 
 module caster() {

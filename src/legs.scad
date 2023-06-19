@@ -1,25 +1,11 @@
 include <common.scad>
-bed_wood=wood;
 
-bed_x=1530;
-bed_y=2030;
-bed_z=12*in;
-
-pillowboard_y=4*in;
-pillowboard_depth=bed_wood+two;
-
-overhang=10*in;
 back_overhang=0;
 
-leg_x=four+wood*2;
 edge=2*in;
 inner=bed_z;
 
 leg_y=bed_y-overhang-back_overhang;
-
-// t=o/a
-leg_angle=atan(overhang/(bed_z-bed_wood-two));
-
 leg_face=(bed_z-bed_wood-two)/cos(leg_angle);
 
 pump_x=10*in;
@@ -28,16 +14,8 @@ pump_z=6*in;
 pump_ramp=pump_x-four-wood;
 pump_center=bed_y/3;
 
-mattress_r=2*in;
-spines=6;
 leveler_gap=in/2;
-spine_end=0;
-spine_gap=(bed_y-four-spine_end*2)/(spines-1);
 leveler=leg_y(0)+pillowboard_y+wood;
-
-
-
-function leg_y(z)=bed_y-overhang+tan(leg_angle)*z-wood;
 
 // RENDER svg
 module pump_shelf() {

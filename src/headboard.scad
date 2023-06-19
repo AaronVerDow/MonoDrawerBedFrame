@@ -1,16 +1,8 @@
 include <common.scad>
-bed_wood=wood;
-
-bed_x=1530;
-bed_z=12*in;
 
 pillowboard_x=58*in;
-pillowboard_y=4*in;
 pillowboard_z=22*in;
-pillowboard_depth=bed_wood+two;
 pillowboard_border=in*3;
-
-overhang=10*in;
 
 radiator_z=545;
 
