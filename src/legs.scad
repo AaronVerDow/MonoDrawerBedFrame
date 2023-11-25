@@ -1,12 +1,8 @@
 include <common.scad>
 
-back_overhang=0;
-
 edge=2*in;
-inner=bed_z;
 
-leg_y=bed_y-overhang-back_overhang;
-leg_face=(bed_z-bed_wood-two)/cos(leg_angle);
+leg_face=(bed_z-bed_wood-two-neato)/cos(leg_angle);
 
 pump_x=10*in;
 pump_y=18*in;
@@ -15,7 +11,9 @@ pump_ramp=pump_x-four-wood;
 pump_center=bed_y/3;
 
 leveler_gap=in/2;
-leveler=leg_y(0)+pillowboard_y+wood;
+leveler=leg_y(0)+pillowboard_y+wood+neato;
+
+headboard_extra=pillowboard_y+wood+two;
 
 // RENDER svg
 module pump_shelf() {
@@ -31,19 +29,27 @@ module leg_face() {
 	square([leg_x,leg_face]);
 }
 
+
+module leg_side_positive() {
+	hull() {
+		translate([0,-back_overhang])
+		square([edge,bed_y+headboard_extra]);
+		square([bed_z-neato,leg_y+headboard_extra]);
+	}
+	square([bed_z,leg_y+headboard_extra]);
+}
+
+
 module leg_side() {
 	difference() {
-		translate([0,-pillowboard_y-wood-two])
-		hull() {
-			translate([0,-back_overhang])
-			square([edge,bed_y+pillowboard_y+wood+two]);
-			square([inner,leg_y+pillowboard_y+wood+two]);
-		}
+		translate([0,-headboard_extra])
+		leg_side_positive();
 
 		translate([-pad,-wood-pillowboard_y])
 		square([pillowboard_depth+pad,pillowboard_y+wood]);
 	}
 }
+
 
 module outer_leg_side() {
 	difference() {
@@ -57,7 +63,7 @@ module legs() {
 
 	color("cyan")
 	dirror_x()
-	translate([overhang-bed_x/2,bed_y-overhang])
+	translate([overhang-bed_x/2,leg_y,neato])
 	rotate([90-leg_angle,0])
 	wood()
 	leg_face();

@@ -7,18 +7,21 @@ wood=in/2;
 two=38;
 four=90;
 
+neato=120;
+
 bed_x=1530;
 bed_y=2030;
 bed_z=12*in;
 bed_wood=wood;
 
 overhang=10*in;
+front_overhang=overhang-neato;
 
 caster_x=20.5;
 caster_y=42;
 wheel_z=28;
 
-leg_angle=atan(overhang/(bed_z-bed_wood-two));
+leg_angle=atan(front_overhang/(bed_z-bed_wood-two-neato));
 function leg_y(z)=bed_y-overhang+tan(leg_angle)*z-wood;
 leg_x=four+wood*2;
 
@@ -30,6 +33,8 @@ pillowboard_depth=bed_wood+two;
 spine_end=0;
 spines=6;
 spine_gap=(bed_y-four-spine_end*2)/(spines-1);
+back_overhang=0;
+leg_y=bed_y-back_overhang-front_overhang;
 
 module corner(r) {
 	offset(r*2)

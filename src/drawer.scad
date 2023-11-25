@@ -8,7 +8,7 @@ drawer_x=bed_x-leg_x*2-drawer_x_gap-overhang*2;
 drawer_z=bed_z-bed_wood-two-drawer_top_gap;
 
 // c=a/h
-drawer_face=(drawer_z-drawer_base_gap)/cos(leg_angle);
+drawer_face=(drawer_z-neato)/cos(leg_angle);
 
 caster_lane=caster_x*1.5;
 caster_edge=caster_y;
@@ -23,6 +23,7 @@ module drawer_side() {
 		square([zero,leg_y(drawer_z)]);
 		square([zero,leg_y(wheel_z)]);
 	}
+	square([neato-wheel_z,leg_y]);
 }
 
 // RENDER svg
@@ -57,7 +58,7 @@ module drawer() {
 	wood()
 	drawer_back();
 
-	translate([-drawer_x/2,leg_y(drawer_base_gap),drawer_base_gap])
+	translate([-drawer_x/2,leg_y,neato])
 	rotate([90-leg_angle,0])
 	wood()
 	drawer_face();
