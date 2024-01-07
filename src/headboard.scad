@@ -20,13 +20,13 @@ module back() {
 	translate([-back_x/2,bed_z-back_z])
 	square([back_x,back_z]);
 
-	translate([-pillowboard_x/2+pillowboard_border,bed_z-pillowboard_depth])
+	translate([-pillowboard_x/2+pillowboard_border,bed_z])
 	square([pillowboard_x-pillowboard_border*2,pillowboard_z-pillowboard_border]);
 	
 }
 
 module end_cap() {
-	cap_z=bed_z+pillowboard_z-pillowboard_depth-pillowboard_border-radiator_z;
+	cap_z=bed_z+pillowboard_z-pillowboard_border-radiator_z;
 	cap_extra=cap_z/2;
 
 	square([two+wood,pillowboard_z-pillowboard_border]);
@@ -57,54 +57,43 @@ module backstop() {
 	square([pillowboard_x-pillowboard_border*2,backstop_z]);
 }
 
-module pillowboard_base() {
-	translate([-bed_x/2+overhang,0])
-	square([bed_x-overhang*2,pillowboard_y]);
-}
-
 module headboard() {
-	translate([0,-pillowboard_y,0])
 	rotate([90,0])
 	wood()
 	back();
 
-	translate([0,-pillowboard_y,bed_z-pillowboard_depth+pillowboard_z-wood-pillowboard_border-shelf_z])
+	translate([0,0,bed_z+pillowboard_z-wood-pillowboard_border-shelf_z])
 	wood()
 	shelf();
 
-	translate([0,-pillowboard_y-shelf_y+wood,bed_z-pillowboard_depth+pillowboard_z-pillowboard_border-backstop_z])
+	translate([0,-shelf_y+wood,bed_z+pillowboard_z-pillowboard_border-backstop_z])
 	rotate([90,0])
 	wood()
 	backstop();
 		
 	dirror_x()
-	translate([pillowboard_x/2-pillowboard_border-wood,-pillowboard_y,bed_z+pillowboard_z-pillowboard_depth-pillowboard_border])
+	translate([pillowboard_x/2-pillowboard_border-wood,0,bed_z+pillowboard_z-pillowboard_border])
 	rotate([-90,0,-90])
 	wood()
 	end_cap();
 		
 	dirror_x()
-	translate([-wood/2,-pillowboard_y,bed_z+pillowboard_z-pillowboard_depth-pillowboard_border])
+	translate([-wood/2,0,bed_z+pillowboard_z-pillowboard_border])
 	rotate([-90,0,-90])
 	wood()
 	middle_cap();
-
-	translate([0,-pillowboard_y,bed_z-pillowboard_depth-wood])
-	wood()
-	pillowboard_base();
-
 }
 
 module headboard_post() {
 	dirror_x()
 	color("lime")
-	translate([-bed_x/2+overhang+wood,-pillowboard_y-wood-two])
-	cube([four,two,bed_z-pillowboard_depth+pillowboard_z-pillowboard_border-shelf_z-wood-four]);
+	translate([-bed_x/2+overhang+wood,-wood-two])
+	cube([four,two,bed_z+pillowboard_z-pillowboard_border-shelf_z-wood-four]);
 }
 
 module headboard_brace() {
 	color("green")
-	translate([pillowboard_border-pillowboard_x/2+wood,-pillowboard_y-wood-two,bed_z-pillowboard_depth+pillowboard_z-pillowboard_border-shelf_z-wood-four])
+	translate([pillowboard_border-pillowboard_x/2+wood,-wood-two,bed_z+pillowboard_z-pillowboard_border-shelf_z-wood-four])
 	cube([pillowboard_x-pillowboard_border*2-wood*2,two,four]);
 }
 

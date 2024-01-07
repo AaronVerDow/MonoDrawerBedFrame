@@ -9,8 +9,11 @@ four=90;
 
 neato=120;
 
+pillowboard_y=4*in;
+pillowboard_z=22*in;
+
 bed_x=1530;
-bed_y=2030;
+bed_y=2030+pillowboard_y;
 bed_z=12*in;
 bed_wood=wood;
 
@@ -26,9 +29,6 @@ function leg_y(z)=bed_y-overhang+tan(leg_angle)*z-wood;
 leg_x=four+wood*2;
 
 mattress_r=2*in;
-
-pillowboard_y=4*in;
-pillowboard_depth=bed_wood+two;
 
 spine_end=0;
 spines=6;

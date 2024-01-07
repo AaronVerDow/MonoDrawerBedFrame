@@ -10,6 +10,7 @@ chilisleep_y=390;
 chilisleep_z_min=170;
 chilisleep_z_cap=210;
 chilisleep_z_cup=290;
+chilisleep_z=chilisleep_z_min;
 
 sleepnumber_x=180; // includes cord
 sleepnumber_y=330; // includes hoses
@@ -22,9 +23,12 @@ pump_ramp=pump_x-four-wood;
 pump_center=bed_y/3;
 
 leveler_gap=in/2;
-leveler=leg_y(0)+pillowboard_y+wood+neato;
+leveler=leg_y(0)+wood+neato;
 
-headboard_extra=pillowboard_y+wood+two;
+headboard_extra=wood+two;
+
+translate([bed_x/2-chilisleep_x-overhang,0,leveler_gap+two])
+#cube([chilisleep_x,chilisleep_y,chilisleep_z]);
 
 // RENDER svg
 module pump_shelf() {
@@ -56,8 +60,8 @@ module leg_side() {
 		translate([0,-headboard_extra])
 		leg_side_positive();
 
-		translate([-pad,-wood-pillowboard_y])
-		square([pillowboard_depth+pad,pillowboard_y+wood]);
+        translate([bed_z-chilisleep_z-leveler_gap-two,0])
+        square([chilisleep_z,chilisleep_y]);
 	}
 }
 
@@ -66,7 +70,7 @@ module outer_leg_side() {
 	difference() {
 		leg_side();
 		translate([-pad,pump_center-pump_y/2,0])
-		square([pump_z+bed_wood+two+pad,pump_y]);
+		*square([pump_z+bed_wood+two+pad,pump_y]);
 	}
 }
 
@@ -93,7 +97,7 @@ module legs() {
 	wood()
 	outer_leg_side();
 
-	dirror_x()
+	*dirror_x()
 	translate([bed_x/2-overhang-leg_x,pump_center,bed_z-bed_wood-two-pump_z])
 	wood()
 	pump_shelf();
@@ -108,14 +112,15 @@ module leg_ribs() {
 		cube([four,two,bed_z-bed_wood-two*2-leveler_gap]);
 	}
 
-	rib();
+	rib(1);
+	rib(2);
 	rib(3);
 	rib(4);
 }
 
 module leveler() {
 	dirror_x()
-	translate([overhang+wood-bed_x/2,-pillowboard_y-wood,leveler_gap])
+	translate([overhang+wood-bed_x/2,-wood,leveler_gap])
 	cube([four,leveler,two]);
 }
 
