@@ -4,6 +4,17 @@ edge=2*in;
 
 leg_face=(bed_z-bed_wood-two-neato)/cos(leg_angle);
 
+
+chilisleep_x=350;
+chilisleep_y=390;
+chilisleep_z_min=170;
+chilisleep_z_cap=210;
+chilisleep_z_cup=290;
+
+sleepnumber_x=180; // includes cord
+sleepnumber_y=330; // includes hoses
+sleepnumber_z=125;
+
 pump_x=10*in;
 pump_y=18*in;
 pump_z=6*in;
